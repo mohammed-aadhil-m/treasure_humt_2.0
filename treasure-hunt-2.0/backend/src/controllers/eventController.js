@@ -5,7 +5,7 @@ const { getEventSettings } = require('../utils/eventSettings');
 const { ApiError } = require('../utils/ApiError');
 
 function scanUrlFor(secureToken, req) {
-  let base = process.env.PUBLIC_FRONTEND_URL;
+  let base = process.env.PUBLIC_FRONTEND_URL || process.env.FRONTEND_URL;
   if (!base && req) {
     const hostHeader = req.headers['x-forwarded-host'] || req.headers.host;
     if (hostHeader) {
