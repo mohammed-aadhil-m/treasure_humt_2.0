@@ -3,7 +3,9 @@ require('dotenv').config();
 const { supabase } = require('../src/config/supabaseClient');
 
 const RIDDLES_DATA = [
-  // ROUND 1:
+  // ==========================================
+  // ROUND 1 (10 Challenges — Easy / Basics)
+  // ==========================================
   {
     roundNumber: 1,
     code: 'R1-001',
@@ -70,8 +72,54 @@ const RIDDLES_DATA = [
     points: 100,
     penalty: 10,
   },
+  {
+    roundNumber: 1,
+    code: 'R1-007',
+    type: 'riddle',
+    question: 'I have hands, but I cannot hold.\nI have a face, but I cannot smile.\nI never stop ticking.',
+    correctAnswer: 'Clock',
+    acceptedAnswers: ['clock', 'the clock', 'wall clock', 'watch', 'the wall clock', 'time'],
+    hint: 'Hangs high on the wall showing minutes and hours.',
+    points: 100,
+    penalty: 10,
+  },
+  {
+    roundNumber: 1,
+    code: 'R1-008',
+    type: 'puzzle',
+    question: 'Feed me all your waste, wrappers, and paper.\nI keep the room clean, but I am never full for long.',
+    correctAnswer: 'Dustbin',
+    acceptedAnswers: ['dustbin', 'the dustbin', 'trash can', 'garbage can', 'waste bin', 'bin', 'dust bin', 'trashcan'],
+    hint: 'Standing in the corner waiting for used wrappers and scrap.',
+    points: 100,
+    penalty: 10,
+  },
+  {
+    roundNumber: 1,
+    code: 'R1-009',
+    type: 'riddle',
+    question: 'I cover what lets sunlight in,\nI flutter when the breeze rolls by.\nPull me aside to see outside.',
+    correctAnswer: 'Curtain',
+    acceptedAnswers: ['curtain', 'curtains', 'the curtain', 'the curtains', 'window curtain', 'drapes'],
+    hint: 'Fabric hanging beside the window panes.',
+    points: 100,
+    penalty: 10,
+  },
+  {
+    roundNumber: 1,
+    code: 'R1-010',
+    type: 'puzzle',
+    question: 'I speak on the board without making a sound.\nThe more I write, the shorter I get.',
+    correctAnswer: 'Marker',
+    acceptedAnswers: ['marker', 'whiteboard marker', 'the marker', 'chalk', 'board marker', 'pen'],
+    hint: 'Held by the professor writing notes on the whiteboard.',
+    points: 100,
+    penalty: 10,
+  },
 
-  // ROUND 2:
+  // ==========================================
+  // ROUND 2 (10 Challenges — Hall, Media & Display)
+  // ==========================================
   {
     roundNumber: 2,
     code: 'R2-001',
@@ -138,8 +186,54 @@ const RIDDLES_DATA = [
     points: 150,
     penalty: 10,
   },
+  {
+    roundNumber: 2,
+    code: 'R2-007',
+    type: 'puzzle',
+    question: 'I have a tail or live on wireless air.\nI have two ears you click, but I am not a real rodent.',
+    correctAnswer: 'Mouse',
+    acceptedAnswers: ['mouse', 'computer mouse', 'the mouse', 'wireless mouse', 'optical mouse'],
+    hint: 'Sits beside the laptop controlling the pointer on screen.',
+    points: 150,
+    penalty: 10,
+  },
+  {
+    roundNumber: 2,
+    code: 'R2-008',
+    type: 'riddle',
+    question: 'I have holes in the wall waiting silently.\nPlug your charger into me to bring your dead battery to life.',
+    correctAnswer: 'Socket',
+    acceptedAnswers: ['socket', 'plug', 'power socket', 'wall socket', 'plug point', 'switchboard', 'outlet', 'power point'],
+    hint: 'Where participants insert phone charging adapters.',
+    points: 150,
+    penalty: 10,
+  },
+  {
+    roundNumber: 2,
+    code: 'R2-009',
+    type: 'puzzle',
+    question: 'I fit inside your pocket, small as a thumb.\nPlug me into a port, and gigabytes of files appear.',
+    correctAnswer: 'Pen Drive',
+    acceptedAnswers: ['pen drive', 'pendrive', 'usb', 'flash drive', 'usb drive', 'thumb drive'],
+    hint: 'Pocket storage device plugged into USB ports.',
+    points: 150,
+    penalty: 10,
+  },
+  {
+    roundNumber: 2,
+    code: 'R2-010',
+    type: 'riddle',
+    question: 'I never sleep, I never blink.\nA silent eye mounted up high, watching over everyone.',
+    correctAnswer: 'CCTV',
+    acceptedAnswers: ['cctv', 'cctv camera', 'camera', 'security camera', 'the camera', 'surveillance camera'],
+    hint: 'Mounted in the corner of the ceiling for campus security.',
+    points: 150,
+    penalty: 10,
+  },
 
-  // ROUND 3:
+  // ==========================================
+  // ROUND 3 (10 Challenges — Sound, Comfort & Tech)
+  // ==========================================
   {
     roundNumber: 3,
     code: 'R3-001',
@@ -206,8 +300,54 @@ const RIDDLES_DATA = [
     points: 200,
     penalty: 15,
   },
+  {
+    roundNumber: 3,
+    code: 'R3-007',
+    type: 'riddle',
+    question: 'I spin in circles without getting dizzy.\nI have three blades, but I never cut anything.',
+    correctAnswer: 'Fan',
+    acceptedAnswers: ['fan', 'ceiling fan', 'the fan', 'the ceiling fan'],
+    hint: 'Whirring high overhead on the ceiling circulating the breeze.',
+    points: 200,
+    penalty: 15,
+  },
+  {
+    roundNumber: 3,
+    code: 'R3-008',
+    type: 'puzzle',
+    question: 'I wrap around your head or rest in your ears.\nI bring music to your world without letting anyone else hear.',
+    correctAnswer: 'Headphones',
+    acceptedAnswers: ['headphones', 'earphones', 'headphone', 'earphone', 'airpods', 'headset', 'earbuds'],
+    hint: 'Plugged into phones or laptops for private listening.',
+    points: 200,
+    penalty: 15,
+  },
+  {
+    roundNumber: 3,
+    code: 'R3-009',
+    type: 'riddle',
+    question: 'I have zips, pockets, and two straps.\nI ride on your back carrying your books and laptop everywhere.',
+    correctAnswer: 'Bag',
+    acceptedAnswers: ['bag', 'backpack', 'college bag', 'school bag', 'the bag', 'the backpack'],
+    hint: 'Carried on the shoulders by every college student.',
+    points: 200,
+    penalty: 15,
+  },
+  {
+    roundNumber: 3,
+    code: 'R3-010',
+    type: 'puzzle',
+    question: 'I have blinking lights and small antennas.\nI connect you to the whole world without a single physical wire.',
+    correctAnswer: 'Router',
+    acceptedAnswers: ['router', 'wifi router', 'wi-fi router', 'the router', 'wifi', 'wi-fi', 'modem'],
+    hint: 'The box radiating campus wireless internet signals.',
+    points: 200,
+    penalty: 15,
+  },
 
-  // ROUND 4:
+  // ==========================================
+  // ROUND 4 (10 Challenges — Stage & Surroundings)
+  // ==========================================
   {
     roundNumber: 4,
     code: 'R4-001',
@@ -274,8 +414,54 @@ const RIDDLES_DATA = [
     points: 250,
     penalty: 15,
   },
+  {
+    roundNumber: 4,
+    code: 'R4-007',
+    type: 'riddle',
+    question: 'I stand proudly on the stage with a sloping top.\nSpeakers rest their notes and microphones on me.',
+    correctAnswer: 'Podium',
+    acceptedAnswers: ['podium', 'lectern', 'the podium', 'the lectern', 'speaker stand', 'dais'],
+    hint: 'The wooden standing desk at the center of the stage.',
+    points: 250,
+    penalty: 15,
+  },
+  {
+    roundNumber: 4,
+    code: 'R4-008',
+    type: 'puzzle',
+    question: 'I hang around your neck on a ribbon.\nI show your photo, name, and college to prove who you are.',
+    correctAnswer: 'ID Card',
+    acceptedAnswers: ['id card', 'id', 'identity card', 'badge', 'the id card', 'tag', 'id badge', 'lanyard'],
+    hint: 'Every participant wears one on a lanyard around their neck.',
+    points: 250,
+    penalty: 15,
+  },
+  {
+    roundNumber: 4,
+    code: 'R4-009',
+    type: 'riddle',
+    question: 'I am bright red, filled with pressure, and wait silently on the wall.\nIn times of smoke and heat, I am your hero.',
+    correctAnswer: 'Fire Extinguisher',
+    acceptedAnswers: ['fire extinguisher', 'extinguisher', 'the fire extinguisher', 'red cylinder', 'fire cylinder'],
+    hint: 'Red safety canister mounted on the corridor walls.',
+    points: 250,
+    penalty: 15,
+  },
+  {
+    roundNumber: 4,
+    code: 'R4-010',
+    type: 'puzzle',
+    question: 'I am smooth, shiny, and blank until you write.\nBut a single swipe of a duster erases all my thoughts.',
+    correctAnswer: 'Whiteboard',
+    acceptedAnswers: ['whiteboard', 'white board', 'the whiteboard', 'board', 'marker board'],
+    hint: 'Large white board at the front written on with dry-erase markers.',
+    points: 250,
+    penalty: 15,
+  },
 
-  // ROUND 5:
+  // ==========================================
+  // ROUND 5 (10 Challenges — Finale & Treasure)
+  // ==========================================
   {
     roundNumber: 5,
     code: 'R5-001',
@@ -342,6 +528,50 @@ const RIDDLES_DATA = [
     points: 500,
     penalty: 20,
   },
+  {
+    roundNumber: 5,
+    code: 'R5-007',
+    type: 'riddle',
+    question: 'I have handles like a pot, and shine like gold or silver.\nOnly the champions get to lift me high.',
+    correctAnswer: 'Trophy',
+    acceptedAnswers: ['trophy', 'the trophy', 'cup', 'the cup', 'medal', 'shield', 'award', 'championship trophy'],
+    hint: 'The gleaming golden cup waiting for the winning team.',
+    points: 500,
+    penalty: 20,
+  },
+  {
+    roundNumber: 5,
+    code: 'R5-008',
+    type: 'puzzle',
+    question: 'I am made of paper, stamped with prestige and signed by leaders.\nI prove that you competed and conquered.',
+    correctAnswer: 'Certificate',
+    acceptedAnswers: ['certificate', 'the certificate', 'award', 'diploma', 'participation certificate'],
+    hint: 'Printed document awarded to winners and participants.',
+    points: 500,
+    penalty: 20,
+  },
+  {
+    roundNumber: 5,
+    code: 'R5-009',
+    type: 'riddle',
+    question: 'Open my clamshell body, awake my glowing brain.\nI calculate in nanoseconds, running code for your symposium.',
+    correctAnswer: 'Laptop',
+    acceptedAnswers: ['laptop', 'computer', 'the laptop', 'pc', 'notebook', 'the computer'],
+    hint: 'Portable computing machine sitting on the coordinator desk.',
+    points: 500,
+    penalty: 20,
+  },
+  {
+    roundNumber: 5,
+    code: 'R5-010',
+    type: 'puzzle',
+    question: 'You started as seekers,\nYou decoded the night,\nYou ran through each checkpoint,\nWith teamwork and might.\nName the golden prize\nthat crowns every champion!',
+    correctAnswer: 'Victory',
+    acceptedAnswers: ['victory', 'treasure', 'winner', 'champion', 'success', 'trophy', 'first place', 'the victory', 'the treasure'],
+    hint: 'What awaits the fastest team at the end of the treasure hunt.',
+    points: 500,
+    penalty: 20,
+  },
 ];
 
 async function seed() {
@@ -357,8 +587,7 @@ async function seed() {
     roundMap[r.round_number] = r.id;
   });
 
-  console.log('[seeder] Removing old challenges (including old quiz questions)...');
-  // First clean up any dependent team_challenges and answer_attempts
+  console.log('[seeder] Cleaning up old challenges...');
   await supabase.from('answer_attempts').delete().neq('id', '00000000-0000-0000-0000-000000000000');
   await supabase.from('team_challenges').delete().neq('id', '00000000-0000-0000-0000-000000000000');
   const { error: delErr } = await supabase.from('challenges').delete().neq('id', '00000000-0000-0000-0000-000000000000');
@@ -366,13 +595,13 @@ async function seed() {
     console.warn('Warning during old challenges delete:', delErr.message);
   }
 
-  console.log('[seeder] Inserting 30 new Riddles & Simple Puzzles across 5 rounds...');
+  console.log('[seeder] Inserting 50 Riddles & Simple Puzzles (10 per round across 5 rounds)...');
   const payload = RIDDLES_DATA.map((item) => ({
     round_id: roundMap[item.roundNumber],
     code: item.code,
     type: item.type,
     question: item.question,
-    options: null, // No options because no quizzes! All are riddle/puzzle
+    options: null, // 100% riddle / puzzle, zero quiz
     correct_answer: item.correctAnswer,
     accepted_answers: item.acceptedAnswers,
     hint: item.hint,
@@ -387,9 +616,15 @@ async function seed() {
     process.exit(1);
   }
 
-  console.log(`[seeder] Successfully seeded ${inserted.length} challenges!`);
-  console.log('Sample inserted:');
-  inserted.slice(0, 5).forEach((c) => console.log(` - ${c.code} (${c.type})`));
+  console.log(`[seeder] Successfully seeded ${inserted.length} challenges (10 per round)!`);
+  
+  // Count per round:
+  const counts = {};
+  inserted.forEach((c) => {
+    const rNum = Object.keys(roundMap).find((k) => roundMap[k] === c.round_id);
+    counts[`Round ${rNum}`] = (counts[`Round ${rNum}`] || 0) + 1;
+  });
+  console.log('Challenges per round:', counts);
   process.exit(0);
 }
 
