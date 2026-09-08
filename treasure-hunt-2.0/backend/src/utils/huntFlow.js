@@ -197,13 +197,22 @@ async function buildHuntState(team) {
   }
 
   // Round's challenge is solved; team is holding a hint and must physically
-  // find and scan the next QR checkpoint. We deliberately return only the
-  // hint text here — never a QR location, URL, or checkpoint number.
+  // find and scan the next QR checkpoint. Prioritize the custom hint_note set
+  // on the next QR Checkpoint in the Admin panel, falling back to challenge.hint.
   const challenge = await getChallengeById(tc.challenge_id);
+  const nextCheckpointNumber = round.round_number + 1;
+  const { data: nextCp } = await supabase
+    .from('qr_checkpoints')
+    .select('hint_note')
+    .eq('checkpoint_number', nextCheckpointNumber)
+    .maybeSingle();
+
+  const hintText = (nextCp?.hint_note && nextCp.hint_note.trim()) || challenge.hint;
+
   return {
     phase: 'AWAITING_NEXT_QR',
     roundNumber: round.round_number,
-    hint: challenge.hint,
+    hint: hintText,
     progress: await buildProgressArray(team),
     elapsedSeconds: elapsedSeconds(team.started_at, new Date()),
     score: team.score,

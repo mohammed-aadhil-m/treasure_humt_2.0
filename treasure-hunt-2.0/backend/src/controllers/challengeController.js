@@ -101,12 +101,26 @@ const submitAnswer = asyncHandler(async (req, res) => {
       points_change: points,
     });
 
+    const isFinalRound = round.round_number === TOTAL_ROUNDS;
+    let nextHint = isFinalRound ? null : challenge.hint;
+    if (!isFinalRound) {
+      const nextCheckpointNumber = round.round_number + 1;
+      const { data: nextCp } = await supabase
+        .from('qr_checkpoints')
+        .select('hint_note')
+        .eq('checkpoint_number', nextCheckpointNumber)
+        .maybeSingle();
+      if (nextCp?.hint_note && nextCp.hint_note.trim()) {
+        nextHint = nextCp.hint_note.trim();
+      }
+    }
+
     return res.json({
       success: true,
       correct: true,
       pointsEarned: points,
       finished: isFinalRound,
-      hint: isFinalRound ? null : challenge.hint,
+      hint: nextHint,
       message: isFinalRound ? 'Round 5 complete — the treasure is yours!' : 'Correct! Round complete.',
     });
   }
