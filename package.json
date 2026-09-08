@@ -1,0 +1,18 @@
+{
+  "name": "treasure-hunt-2.0-workspace",
+  "version": "2.0.0",
+  "private": true,
+  "description": "TREASURE HUNT 2.0 - QR-based College Technical Symposium Web App (Max 2 Members per Team)",
+  "scripts": {
+    "start": "npm run dev:all",
+    "dev": "npm run dev:all",
+    "dev:all": "npx -y concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm --prefix treasure-hunt-2.0/backend run dev",
+    "dev:frontend": "npm --prefix treasure-hunt-2.0/frontend run dev",
+    "build": "npm --prefix treasure-hunt-2.0/frontend run build",
+    "test:auth": "node treasure-hunt-2.0/backend/scripts/testAuthLogic.js",
+    "test:flow": "node test_full_hunt_flow.js",
+    "create-admin": "node treasure-hunt-2.0/backend/scripts/createAdmin.js",
+    "tunnel": "npx localtunnel --port 5173"
+  }
+}
