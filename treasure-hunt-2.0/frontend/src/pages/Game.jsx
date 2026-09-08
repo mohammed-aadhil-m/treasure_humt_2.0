@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Brand from '../components/Brand';
 import LoadingScreen from '../components/LoadingScreen';
 import ProgressRail from '../components/ProgressRail';
@@ -19,9 +19,11 @@ import { api } from '../services/api';
 export default function Game() {
   const { sessionToken, team, memberName, login, logout, updateTeam, ready } = useTeam();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [state, setState] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const initialHuntState = location.state?.huntState || null;
+  const [state, setState] = useState(initialHuntState);
+  const [loading, setLoading] = useState(!initialHuntState);
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
   const [successOverlay, setSuccessOverlay] = useState(null);

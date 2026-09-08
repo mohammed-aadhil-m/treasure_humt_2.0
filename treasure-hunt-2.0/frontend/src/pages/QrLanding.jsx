@@ -24,7 +24,7 @@ export default function QrLanding() {
     const fn = roundNum === 0 ? api.startHunt : api.scanCheckpoint;
     const res = await fn(token, qrToken);
     if (res?.team && updateTeam) updateTeam(res.team);
-    navigate('/hunt', { replace: true });
+    navigate('/hunt', { replace: true, state: { huntState: res } });
   };
 
   // Already logged in on this device (e.g. scanning QR #2-#5 after QR #1) —

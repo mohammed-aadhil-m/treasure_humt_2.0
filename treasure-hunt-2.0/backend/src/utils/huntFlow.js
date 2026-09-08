@@ -38,20 +38,33 @@ function publicTeam(team) {
   };
 }
 
-async function getRoundByNumber(roundNumber) {
-  const { data, error } = await supabase
-    .from('rounds')
-    .select('*')
-    .eq('round_number', roundNumber)
-    .maybeSingle();
-  if (error || !data) throw new ApiError(500, `Round ${roundNumber} is not configured.`);
+let roundsCache = null;
+let roundsCacheTime = 0;
+
+async function getAllRounds() {
+  const now = Date.now();
+  if (roundsCache && now - roundsCacheTime < 60000) {
+    return roundsCache;
+  }
+  const { data, error } = await supabase.from('rounds').select('*').order('round_number', { ascending: true });
+  if (error || !data) throw new ApiError(500, 'Failed to load rounds.');
+  roundsCache = data;
+  roundsCacheTime = now;
   return data;
 }
 
+async function getRoundByNumber(roundNumber) {
+  const rounds = await getAllRounds();
+  const found = rounds.find((r) => Number(r.round_number) === Number(roundNumber));
+  if (!found) throw new ApiError(500, `Round ${roundNumber} is not configured.`);
+  return found;
+}
+
 async function getRoundById(roundId) {
-  const { data, error } = await supabase.from('rounds').select('*').eq('id', roundId).maybeSingle();
-  if (error || !data) throw new ApiError(500, 'Round not found.');
-  return data;
+  const rounds = await getAllRounds();
+  const found = rounds.find((r) => r.id === roundId);
+  if (!found) throw new ApiError(500, 'Round not found.');
+  return found;
 }
 
 async function getChallengeById(challengeId) {
@@ -225,7 +238,11 @@ async function buildHuntState(team) {
 // stored current_round — the client's belief about where it is never
 // matters, only what the database says.
 async function advanceViaCheckpoint(team, secureToken) {
-  const settings = await getEventSettings();
+  const [settings, cpRes] = await Promise.all([
+    getEventSettings(),
+    supabase.from('qr_checkpoints').select('*').eq('secure_token', secureToken).maybeSingle(),
+  ]);
+
   if (settings.status === 'PAUSED') {
     throw new ApiError(423, 'The treasure hunt is temporarily paused. Please wait for the organizer to resume.');
   }
@@ -233,12 +250,7 @@ async function advanceViaCheckpoint(team, secureToken) {
     throw new ApiError(423, 'This event has ended.');
   }
 
-  const { data: checkpoint, error: cpError } = await supabase
-    .from('qr_checkpoints')
-    .select('*')
-    .eq('secure_token', secureToken)
-    .maybeSingle();
-
+  const { data: checkpoint, error: cpError } = cpRes;
   if (cpError) throw new ApiError(500, 'QR lookup failed.');
   if (!checkpoint || !checkpoint.is_active) {
     throw new ApiError(404, 'This QR code is not active.');
@@ -275,26 +287,21 @@ async function advanceViaCheckpoint(team, secureToken) {
     updates.status = 'IN_PROGRESS';
   }
 
-  const { data: updatedTeam, error: updateError } = await supabase
-    .from('teams')
-    .update(updates)
-    .eq('id', team.id)
-    .select('*')
-    .single();
+  const [{ data: updatedTeam, error: updateError }] = await Promise.all([
+    supabase.from('teams').update(updates).eq('id', team.id).select('*').single(),
+    supabase
+      .from('team_progress')
+      .upsert(
+        { team_id: team.id, round_id: nextRound.id, qr_checkpoint_id: checkpoint.id },
+        { onConflict: 'team_id,round_id', ignoreDuplicates: true }
+      ),
+    supabase
+      .from('qr_checkpoints')
+      .update({ scan_count: checkpoint.scan_count + 1 })
+      .eq('id', checkpoint.id),
+  ]);
+
   if (updateError) throw new ApiError(500, 'Failed to update team progress.');
-
-  // Ensure a team_progress row exists for this round (idempotent).
-  await supabase
-    .from('team_progress')
-    .upsert(
-      { team_id: team.id, round_id: nextRound.id, qr_checkpoint_id: checkpoint.id },
-      { onConflict: 'team_id,round_id', ignoreDuplicates: true }
-    );
-
-  await supabase
-    .from('qr_checkpoints')
-    .update({ scan_count: checkpoint.scan_count + 1 })
-    .eq('id', checkpoint.id);
 
   return buildHuntState(updatedTeam);
 }
