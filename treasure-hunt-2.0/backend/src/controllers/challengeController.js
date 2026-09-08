@@ -101,7 +101,6 @@ const submitAnswer = asyncHandler(async (req, res) => {
       points_change: points,
     });
 
-    const isFinalRound = round.round_number === TOTAL_ROUNDS;
     let nextHint = isFinalRound ? null : challenge.hint;
     if (!isFinalRound) {
       const nextCheckpointNumber = round.round_number + 1;
