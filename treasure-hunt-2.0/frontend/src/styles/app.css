@@ -1,0 +1,613 @@
+/* ============================================================
+   Layout shells
+   ============================================================ */
+
+.th-screen {
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 40px;
+}
+
+.th-container {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.th-container-wide {
+  max-width: 760px;
+}
+
+/* ============================================================
+   Brand header
+   ============================================================ */
+
+.th-brand {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.th-brand-mark {
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+}
+
+.th-brand h1 {
+  font-size: clamp(28px, 8vw, 40px);
+  font-weight: 900;
+  background: linear-gradient(120deg, var(--cyan), var(--purple) 60%, var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+}
+
+.th-tagline {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   Glass panels / cards
+   ============================================================ */
+
+.th-panel {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-panel), var(--bg-panel-solid));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 26px 22px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.th-panel-quiet {
+  border-radius: var(--radius-md);
+  padding: 18px 18px;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.th-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 15px 22px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  width: 100%;
+}
+
+.th-btn:active {
+  transform: scale(0.97);
+}
+
+.th-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.th-btn-primary {
+  background: linear-gradient(120deg, var(--cyan), #59f0c9);
+  color: #04141a;
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.th-btn-primary:hover:not(:disabled) {
+  box-shadow: 0 0 34px rgba(44, 232, 255, 0.4), 0 0 8px rgba(44, 232, 255, 0.55);
+}
+
+.th-btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.th-btn-ghost:hover:not(:disabled) {
+  border-color: var(--border-bright);
+  color: var(--cyan);
+}
+
+.th-btn-danger {
+  background: linear-gradient(120deg, var(--red), #ff7a54);
+  color: #250608;
+  box-shadow: var(--shadow-glow-red);
+}
+
+.th-btn-gold {
+  background: linear-gradient(120deg, var(--gold), #ffe08a);
+  color: #241703;
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.th-btn-sm {
+  padding: 9px 14px;
+  font-size: 11px;
+  width: auto;
+}
+
+/* ============================================================
+   Forms
+   ============================================================ */
+
+.th-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.th-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.th-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 15px 16px;
+  font-size: 16px;
+  font-family: var(--font-mono);
+  color: var(--text);
+  letter-spacing: 0.05em;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.th-input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(44, 232, 255, 0.15);
+}
+
+.th-input::placeholder {
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Progress rail (5 rounds)
+   ============================================================ */
+
+.th-progress-rail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.th-progress-node {
+  flex: 1;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(150, 170, 220, 0.14);
+  position: relative;
+  overflow: hidden;
+}
+
+.th-progress-node.is-completed {
+  background: var(--green);
+  box-shadow: var(--shadow-glow-green);
+}
+
+.th-progress-node.is-current {
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.th-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   Scan-target frame — the signature visual: every active challenge
+   sits inside a viewfinder made of four corner brackets, echoing the
+   QR-scanning premise of the whole game. A scanline sweeps once on load.
+   ============================================================ */
+
+.th-scan-frame {
+  position: relative;
+  padding: 30px 22px;
+  border-radius: var(--radius-md);
+  background: rgba(10, 14, 26, 0.6);
+}
+
+.th-scan-frame::before,
+.th-scan-frame::after,
+.th-scan-frame .th-corner-tl,
+.th-scan-frame .th-corner-tr,
+.th-scan-frame .th-corner-bl,
+.th-scan-frame .th-corner-br {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--cyan);
+  border-style: solid;
+  opacity: 0.85;
+}
+
+.th-corner-tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; border-top-left-radius: 6px; }
+.th-corner-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; border-top-right-radius: 6px; }
+.th-corner-bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; border-bottom-left-radius: 6px; }
+.th-corner-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; border-bottom-right-radius: 6px; }
+
+.th-scan-frame .th-scanline {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  top: 0;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: th-scan-sweep 1.6s ease-out 1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Badges / pills
+   ============================================================ */
+
+.th-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  width: fit-content;
+}
+
+.th-badge-cyan { color: var(--cyan); border-color: rgba(44,232,255,0.35); background: rgba(44,232,255,0.08); }
+.th-badge-gold { color: var(--gold); border-color: rgba(255,194,71,0.35); background: rgba(255,194,71,0.08); }
+.th-badge-green { color: var(--green); border-color: rgba(61,255,160,0.35); background: rgba(61,255,160,0.08); }
+.th-badge-red { color: var(--red); border-color: rgba(255,65,102,0.35); background: rgba(255,65,102,0.08); }
+
+/* ============================================================
+   Options grid (quiz)
+   ============================================================ */
+
+.th-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.th-option {
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.th-option:hover {
+  border-color: var(--border-bright);
+}
+
+.th-option.is-selected {
+  border-color: var(--cyan);
+  background: rgba(44, 232, 255, 0.08);
+}
+
+.th-option-letter {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--cyan);
+  width: 22px;
+}
+
+/* ============================================================
+   Feedback banners
+   ============================================================ */
+
+.th-feedback {
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-size: 14px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.th-feedback-error {
+  border-color: rgba(255, 65, 102, 0.4);
+  background: rgba(255, 65, 102, 0.08);
+  color: #ffb3c1;
+}
+
+.th-feedback-success {
+  border-color: rgba(61, 255, 160, 0.4);
+  background: rgba(61, 255, 160, 0.08);
+  color: #b9ffdd;
+}
+
+/* ============================================================
+   Timer
+   ============================================================ */
+
+.th-timer {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  color: var(--cyan);
+}
+
+/* ============================================================
+   Leaderboard
+   ============================================================ */
+
+.th-leaderboard-row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.th-leaderboard-row.is-leader {
+  border-color: rgba(255, 194, 71, 0.5);
+  background: rgba(255, 194, 71, 0.07);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.th-rank {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text-dim);
+}
+
+.th-leaderboard-row.is-leader .th-rank {
+  color: var(--gold);
+}
+
+.th-team-name {
+  font-weight: 600;
+}
+
+.th-team-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.th-score {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text);
+  text-align: right;
+}
+
+/* ============================================================
+   Decrypt / typewriter hint reveal
+   ============================================================ */
+
+.th-decrypt {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Loading spinner
+   ============================================================ */
+
+.th-spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid rgba(150, 170, 220, 0.2);
+  border-top-color: var(--cyan);
+  animation: th-spin 0.8s linear infinite;
+}
+
+.th-loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 100dvh;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Admin layout
+   ============================================================ */
+
+.th-admin-shell {
+  display: flex;
+  min-height: 100dvh;
+}
+
+.th-admin-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.th-admin-main {
+  flex: 1;
+  padding: 32px 36px;
+  max-width: 1200px;
+}
+
+.th-admin-nav-link {
+  display: block;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.th-admin-nav-link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+
+.th-admin-nav-link.is-active {
+  background: rgba(44, 232, 255, 0.1);
+  color: var(--cyan);
+}
+
+.th-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.th-stat-card {
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+
+.th-stat-value {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--cyan);
+}
+
+.th-stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.th-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.th-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.th-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.th-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.th-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 3, 8, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.th-modal {
+  width: 100%;
+  max-width: 480px;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+/* ============================================================
+   Utility
+   ============================================================ */
+
+.th-center-text { text-align: center; }
+.th-flex-col { display: flex; flex-direction: column; gap: 12px; }
+.th-flex-row { display: flex; align-items: center; gap: 10px; }
+.th-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.th-muted { color: var(--text-dim); }
+.th-faint { color: var(--text-faint); }
+.th-mono { font-family: var(--font-mono); }
+.th-mt-8 { margin-top: 8px; }
+.th-mt-16 { margin-top: 16px; }
+.th-mt-24 { margin-top: 24px; }
+.th-w-full { width: 100%; }
+
+@media (max-width: 720px) {
+  .th-admin-shell { flex-direction: column; }
+  .th-admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .th-admin-main { padding: 20px 16px; }
+}

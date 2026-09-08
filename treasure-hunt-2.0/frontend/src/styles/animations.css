@@ -1,0 +1,53 @@
+/* ============================================================
+   Animations — used sparingly and deliberately:
+   scan-sweep (challenge card load), glow-pulse (buttons/badges),
+   shake (wrong answer), unlock-pop (correct/treasure), scroll-in
+   ============================================================ */
+
+@keyframes th-scan-sweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(2200%); opacity: 0; }
+}
+
+@keyframes th-glow-pulse {
+  0%, 100% { box-shadow: var(--shadow-glow-cyan); }
+  50% { box-shadow: 0 0 40px rgba(44, 232, 255, 0.45), 0 0 8px rgba(44, 232, 255, 0.6); }
+}
+
+@keyframes th-shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-5px); }
+  40%, 60% { transform: translateX(5px); }
+}
+
+@keyframes th-pop-in {
+  0% { transform: scale(0.85); opacity: 0; }
+  60% { transform: scale(1.03); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes th-fade-up {
+  from { transform: translateY(14px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes th-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes th-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes th-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.th-anim-shake { animation: th-shake 0.5s ease; }
+.th-anim-pop { animation: th-pop-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.th-anim-fade-up { animation: th-fade-up 0.45s ease both; }
